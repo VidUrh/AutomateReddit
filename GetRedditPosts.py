@@ -21,7 +21,7 @@ def getPost(subredditTopic):
         if not submission.stickied and not submission.clicked and sub_id not in visited:
             post[index] = [submission.title,submission.selftext]
             index+=1
-            f.write(sub_id+'\n')
+            #f.write(sub_id+'\n')
     f.close()
     return post
 

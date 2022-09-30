@@ -9,13 +9,17 @@ def getAudioFile(name):
 def getImageClip(title):
     image = mpy.ImageClip(parameters.IMAGES_FOLDER + title + parameters.IMAGES_CODEC)
     image = image.set_position(('center',0.4),relative=True)
-    image = image.resize(width=parameters.MOVIEPY_WIDTH-50)
+    image = image.resize(width=parameters.MOVIEPY_WIDTH-parameters.MOVIEPY_BORDERSIZEOUTER)
     return image
 
+def getVideoClip(title):
+    return mpy.VideoFileClip(parameters.MOVIEPY_BACKGROUNDFILE + title + parameters.MOVIEPY_VIDEOCODEC).resize(width=parameters.MOVIEPY_WIDTH)
 
-def createVideo(imageItems, audioItems):
+
+def createVideo(imageItems, audioItems,backgroundItems):
     # load 
-    background = mpy.VideoFileClip(parameters.MOVIEPY_BACKGROUNDFILE).resize(width=parameters.MOVIEPY_WIDTH)
+    print(backgroundItems)
+    background = mpy.CompositeVideoClip(backgroundItems)
     audioClip = mpy.CompositeAudioClip(audioItems)    
     background = background.loop(duration = audioClip.duration)
     imageItems = [background] + imageItems
