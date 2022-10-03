@@ -17,8 +17,6 @@ def getVideoClip(title):
 
 
 def createVideo(imageItems, audioItems,backgroundItems):
-    # load 
-    print(backgroundItems)
     background = mpy.CompositeVideoClip(backgroundItems)
     audioClip = mpy.CompositeAudioClip(audioItems)    
     background = background.loop(duration = audioClip.duration)
