@@ -15,7 +15,7 @@ def getTTS(text,fileSave):
 
     response = requests.request("POST", parameters.TTS_API_URL, params=dataJSON)
     if response.status_code==200:
-        with open(parameters.SOUNDS_FOLDER+fileSave, 'wb') as f:
+        with open(parameters.SOUNDS_FOLDER+str(fileSave)+parameters.TTS_API_CODEC, 'wb') as f:
             f.write(response.content)
         f.close()
         return True
