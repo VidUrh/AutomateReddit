@@ -27,7 +27,7 @@ option.add_experimental_option(
 # option.add_experimental_option("mobileEmulation", mobile_emulation)
 
 driver = webdriver.Chrome(
-    executable_path="./chromedriver.exe",
+    #executable_path="./chromedriver.exe",
     options=option
 )
 

@@ -8,12 +8,18 @@
 import praw
 import configparser
 import json
+import logging
+
+############################################################################################################
+#   Logging                                                                                                #
+############################################################################################################
+
+logger = logging.getLogger(__name__)
+
 
 ############################################################################################################
 #   Filtering posts                                                                                        #
 ############################################################################################################
-
-
 def isAcceptable(post):
     """ Function for checking if a post has been stickied or clicked on by me.
 
@@ -44,8 +50,6 @@ def isVisited(postID, config):
 ############################################################################################################
 #   Functions                                                                                              #
 ############################################################################################################
-
-
 def getID(post):
     """ Function for getting the id of a post.
 
@@ -60,8 +64,6 @@ def getID(post):
 ############################################################################################################
 #   Main                                                                                                   #
 ############################################################################################################
-
-
 def getPosts():
     """
     This function will get the top posts from a subreddit and save them to a json file.    
@@ -83,6 +85,7 @@ def getPosts():
     for post in hottest_posts:
 
         postID = getID(post)  # Get the id of the post.
+        logger.info(f"Checking post: {postID}")
         if isAcceptable(post) and not isVisited(postID, config):
             # Add the post to the posts dictionary.
             posts[postID] = [post.title, post.selftext]
@@ -90,6 +93,11 @@ def getPosts():
             # Add the post id to the visited.txt file.
             with open(file=config["REDDIT"]["VISITED"], mode='a') as f:
                 f.write(f"{postID}\n")
+                
+            logger.info(f"Added post: {postID}")
     # Dump the posts to a json file.
     with open(file=config["REDDIT"]["POSTS_FILE"], mode='w') as postsFile:
         json.dump(posts, postsFile, indent=6)
+        postsFile.close()
+        logger.info(f"Saved posts to file: {config['REDDIT']['POSTS_FILE']}")
+    logger.info("Finished getting posts from reddit.")
