@@ -5,9 +5,9 @@ This project is a Reddit video generator that retrieves posts from a specified s
 ## Installation
 To install the necessary dependencies, follow these steps:
 
-Clone the project repository: ```git clone https://github.com/your-username/reddit-video-generator.git```
+Clone the project repository: ```git clone https://github.com/VidUrh/AutomateReddit.git```
 
-Navigate to the project directory: cd reddit-video-generator
+Navigate to the project directory: cd AutomateReddit
 
 Install the required packages: pip install -r requirements.txt
 ## Usage
